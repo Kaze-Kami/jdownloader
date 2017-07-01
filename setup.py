@@ -25,10 +25,10 @@ if __name__ == '__main__':
     if not get_path.exists():
         open(get_path, 'w')
 
-    create_bat(root_dir.joinpath('run_high.bat'), main_path, dl_dir, get_path, 5, 30, 'NORMAL')
-    # create_bat(root_dir.joinpath('run_high_debug.bat'), main_path, dl_dir, get_path, 5, 30, 'DEBUG')
-    # create_bat(root_dir.joinpath('run_high_quiet.bat'), main_path, dl_dir, get_path, 5, 30, 'QUIET')
-    create_bat(root_dir.joinpath('run_low.bat'), main_path, dl_dir, get_path, 1, 5, 'NORMAL')
+    create_bat(root_dir.joinpath('run_high.bat'), main_path, dl_dir, get_path, 5, 20, 'MINIMAL')
+    # create_bat(root_dir.joinpath('run_high_debug.bat'), main_path, dl_dir, get_path, 5, 20, 'DEBUG')
+    # create_bat(root_dir.joinpath('run_high_quiet.bat'), main_path, dl_dir, get_path, 5, 20, 'QUIET')
+    create_bat(root_dir.joinpath('run_low.bat'), main_path, dl_dir, get_path, 1, 5, 'MINIMAL')
     # create_bat(root_dir.joinpath('run_low_debug.bat'), main_path, dl_dir, get_path, 1, 5, 'DEBUG')
     # create_bat(root_dir.joinpath('run_low_quiet.bat'), main_path, dl_dir, get_path, 1, 5, 'QUIET')
 

@@ -88,9 +88,9 @@ def _chose_parser(url):
 
 
 def _extend_gotten_file(anime, gotten_file_path):
-    url = anime.base_url
+    name = anime.name
     with open(gotten_file_path, 'a') as f:
-        f.write(url + '\n')
+        f.write(name + '\n')
 
 
 def _truncate_get_file(anime, get_file_path):

@@ -64,7 +64,7 @@ class AnimeDownload(Thread):
                 self._active_downloads.append(dl)
                 self._download_count += 1
             else:
-                log("Skipping %s episode %d, already downloaded" % (self._anime.name, ep.number), MessageType.PROGRESS_FINISH, MessageLevel.FULL_INFO)
+                log("Skipping %s episode %d, already downloaded" % (self._anime.name, ep.number), MessageType.PROGRESS_FINISH, MessageLevel.NORMAL_INFO)
         con.release()
 
     def _download(self):

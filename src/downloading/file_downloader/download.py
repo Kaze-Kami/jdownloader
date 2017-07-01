@@ -30,7 +30,7 @@ class Download(Thread):
             for arr in r.iter_content(4096):
                 save_file.write(arr)
                 self._data_gotten += len(arr)
-        log("Download '%s' finished" % self._url, MessageType.PROGRESS_FINISH, MessageLevel.NORMAL_INFO)
+        log("Download '%s' finished" % self._url, MessageType.PROGRESS_FINISH, MessageLevel.MINIMAL_INFO)
         self._con.release()
         self._on_finish()
 

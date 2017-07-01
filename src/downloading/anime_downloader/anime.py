@@ -15,7 +15,7 @@ class Anime:
         self._episodes = []
 
     def prepare(self):
-        log("Preparing anime '%s'" % self._name, MessageType.PROGRESS_START, MessageLevel.NORMAL_INFO)
+        log("Preparing anime '%s'" % self._name, MessageType.PROGRESS_START, MessageLevel.FULL_INFO)
         self._description = self._parser.get_description(self._html)
         self._episodes = self._parser.get_episodes(self._base_url)
         self._episodes_count = len(self._episodes)
