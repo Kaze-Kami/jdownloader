@@ -88,8 +88,8 @@ class AnimeDownload(Thread):
 
 
 def _write_info_file(anime, path):
-    desc = textwrap.fill(text=anime.description, width=130)
-    desc = desc.encode(sys.stdout.encoding, errors='replace')
+    desc = anime.description.encode(sys.stdout.encoding, errors='replace')
+    desc = textwrap.fill(text=desc, width=130)
     with open(path.joinpath('info.txt'), 'w') as f:
         f.write('%s (%s)\n%d Episodes\n\n%s' % (
             anime.base_url, anime.name, anime.episodes_count, desc))
