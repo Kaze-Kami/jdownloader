@@ -1,14 +1,14 @@
 import os
+import sys
 import textwrap
 from datetime import datetime
 from threading import Thread
 
-import sys
+from src.util.logging.logger import MessageType, MessageLevel, log
 
 from src.connection.tor.tor_connection_manager import TorConnectionManager
 from src.downloading.file_downloader.download import Download
 from src.downloading.file_downloader.download_manager import DownloadManager
-from src.util.logging.logger_v2 import Logger, MessageType, MessageLevel, LogLevel, log
 
 
 class AnimeDownload(Thread):

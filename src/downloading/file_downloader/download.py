@@ -1,7 +1,8 @@
 from threading import Thread
 
+from src.util.logging.logger import log, MessageType, MessageLevel
+
 from src.connection.tor.tor_connection_manager import TorConnectionManager
-from src.util.logging.logger_v2 import log, MessageType, MessageLevel
 
 
 class Download(Thread):

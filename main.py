@@ -1,10 +1,10 @@
 import sys
 from pathlib import Path
 
-from AnimeDownloader import AnimeDownloader
-from src.util.logging.logger_v2 import set_global_log_level, LogLevel, log, MessageType, MessageLevel
-from src.downloading.file_downloader import download_manager
+from src.AnimeDownloader import AnimeDownloader
 from src.downloading.anime_downloader import anime_download_manager
+from src.downloading.file_downloader import download_manager
+from src.util.logging.logger import set_global_log_level, LogLevel, log, MessageType, MessageLevel
 
 
 def run(parse_limit, download_limit, get_file_path, base_save_path, log_level):

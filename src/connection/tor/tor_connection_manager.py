@@ -2,7 +2,7 @@ from threading import Lock
 
 from src.connection.tor.config import start_port, log_type
 from src.connection.tor.tor_connection import TorConnection
-from src.util.logging.logger_v2 import Logger, LogLevel, MessageType, MessageLevel, new_log_file
+from src.util.logging.logger import Logger, LogLevel, MessageType, MessageLevel, new_log_file
 from src.util.singleton import Singleton
 
 

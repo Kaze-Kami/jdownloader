@@ -1,18 +1,15 @@
-import os
 import subprocess
+import sys
+import time
 
 import requests
-import sys
-
-import time
 from psutil import Process
+from stem import Signal
+from stem.control import Controller
 
 from src import etc
-from stem.control import Controller
-from stem import Signal
-
 from src.connection.tor.config import TorLogType
-from src.util.logging.logger_v2 import Logger, MessageType, MessageLevel, LogLevel, new_log_file
+from src.util.logging.logger import Logger, MessageType, MessageLevel, LogLevel, new_log_file
 
 
 class TorConnection:

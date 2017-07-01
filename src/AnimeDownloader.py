@@ -2,6 +2,9 @@ import os
 from datetime import datetime
 from threading import Thread
 
+from src.util.jutil import remove_line
+from src.util.logging.logger import log, MessageType, MessageLevel
+
 from src.connection.tor.tor_connection_manager import TorConnectionManager
 from src.downloading.anime_downloader.anime import Anime
 from src.downloading.anime_downloader.anime_download import AnimeDownload
@@ -9,8 +12,6 @@ from src.downloading.anime_downloader.anime_download_manager import AnimeDownloa
 from src.downloading.file_downloader.download_manager import DownloadManager
 # from src.parsing.anime_heaven_parser import AnimeHeavenParser
 from src.parsing import anime_heaven_parser
-from src.util.jutil import remove_line
-from src.util.logging.logger_v2 import log, MessageType, MessageLevel
 
 
 class AnimeDownloader(Thread):
@@ -56,7 +57,7 @@ class AnimeDownloader(Thread):
                 self._anime_download_manager.en_que(anime_download)
             else:
                 log("Skipping '%s', already downloaded" % anime.name, MessageType.PROGRESS_FINISH,
-                    MessageLevel.FULL_INFO)
+                    MessageLevel.MINIMAL_INFO)
                 _extend_gotten_file(anime, self._gotten_file_path)
                 _truncate_get_file(anime, self._get_file_path)
 
@@ -94,7 +95,19 @@ def _extend_gotten_file(anime, gotten_file_path):
 
 def _truncate_get_file(anime, get_file_path):
     url = anime.base_url
-    remove_line(get_file_path, url)
+    with open(get_file_path, 'r') as rf:
+        lines = rf.readlines()
+    last_comment = 0
+    for i, l in enumerate(lines):
+        if 'http:' in l:
+            break
+        elif l[0] == '#':
+            last_comment = i
+
+    with open(get_file_path, 'w') as wf:
+        for l in lines[last_comment:]:
+            if l != url + '\n':
+                wf.write(l)
 
 
 

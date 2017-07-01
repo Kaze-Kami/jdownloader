@@ -1,7 +1,7 @@
 import time
 from threading import Thread
 
-from src.util.logging.logger_v2 import MessageType, MessageLevel, log
+from src.util.logging.logger import MessageType, MessageLevel, log
 from src.util.singleton import Singleton
 
 _download_limit = -1

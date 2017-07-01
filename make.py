@@ -2,15 +2,18 @@ import os
 import shutil
 from pathlib import Path
 
-if __name__ == '__main__':
-    root = Path(os.path.dirname(__file__))
-    target = root.joinpath('bin')
-    if target.exists():
-        shutil.rmtree(target)
-    else:
-        target.mkdir()
+import sys
 
-    shutil.copytree(root.joinpath('src'), target.joinpath('src'))
-    shutil.copytree(root.joinpath('tor_bundle'), target.joinpath('tor_bundle'))
-    shutil.copy(root.joinpath('main.py'), target.joinpath('main.py'))
-    shutil.copy(root.joinpath('AnimeDownloader.py'), target.joinpath('AnimeDownloader.py'))
+if __name__ == '__main__':
+    from_dir = Path(os.path.dirname(__file__))
+    root_dir = Path(sys.argv[1]) if 1 < len(sys.argv) else from_dir
+    root_dir = root_dir.joinpath('jdownloader/')
+    bin_dir = root_dir.joinpath('bin/')
+    if root_dir.exists():
+        shutil.rmtree(root_dir)
+    else:
+        root_dir.mkdir()
+
+    shutil.copytree(from_dir.joinpath('src'), bin_dir.joinpath('src'))
+    shutil.copy(from_dir.joinpath('main.py'), bin_dir.joinpath('main.py'))
+    shutil.copy(from_dir.joinpath('setup.py'), root_dir.joinpath('setup.py'))

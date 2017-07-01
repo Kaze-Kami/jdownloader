@@ -1,6 +1,7 @@
 import re
 
 from bs4 import BeautifulSoup
+
 from src.connection.tor.tor_connection_manager import TorConnectionManager
 from src.downloading.anime_downloader.anime import Episode
 

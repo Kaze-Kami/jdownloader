@@ -1,9 +1,10 @@
 import sys
-
 from datetime import datetime
 from enum import Enum
 from threading import Lock
+
 from clint.textui.colored import cyan, green, yellow, blue, magenta, red, white
+
 from src.connection.tor.config import TorLogType, set_log_type
 from src.etc import log_path
 
