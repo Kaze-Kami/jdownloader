@@ -22,6 +22,7 @@ class AnimeDownloader(Thread):
         self._gotten_file_path = get_file_path.parent.joinpath(time_string + ".txt")
         self._base_save_path = base_save_path
         self._urls = []
+        self._count = 0
         self._active_downloads = []
         self._anime_download_manager = AnimeDownloadManager()
         self._download_manager = DownloadManager()
@@ -34,7 +35,10 @@ class AnimeDownloader(Thread):
 
     def on_download_finished(self, anime_download):
         self._active_downloads.remove(anime_download)
-        log('Downloaded %d of %d animes' % (len(self._urls) - len(self._active_downloads), len(self._urls)),
+        self._count += 1
+        _extend_gotten_file(anime_download.anime, self._gotten_file_path)
+        _truncate_get_file(anime_download.anime, self._get_file_path)
+        log('Downloaded %d of %d animes' % (self._count, len(self._urls)),
             MessageType.SYSTEM, MessageLevel.SYSTEM)
         if 0 == len(self._active_downloads):
             self._on_finish()
@@ -42,7 +46,6 @@ class AnimeDownloader(Thread):
     def _prepare(self):
         # read get file
         self._urls = _read_get_file(self._get_file_path)
-
         # init downloads
         log('Downloading %d animes' % (len(self._urls)), MessageType.SYSTEM, MessageLevel.SYSTEM)
         self._anime_download_manager.start()
@@ -58,6 +61,7 @@ class AnimeDownloader(Thread):
             else:
                 log("Skipping '%s', already downloaded" % anime.name, MessageType.PROGRESS_FINISH,
                     MessageLevel.MINIMAL_INFO)
+                self._count += 1
                 _extend_gotten_file(anime, self._gotten_file_path)
                 _truncate_get_file(anime, self._get_file_path)
 

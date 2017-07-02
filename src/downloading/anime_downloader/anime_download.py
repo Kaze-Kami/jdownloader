@@ -1,3 +1,4 @@
+import codecs
 import os
 import sys
 import textwrap
@@ -88,11 +89,14 @@ class AnimeDownload(Thread):
 
 
 def _write_info_file(anime, path):
-    desc = anime.description.encode(sys.stdout.encoding, errors='replace')
-    desc = textwrap.fill(text=desc, width=130)
-    with open(path.joinpath('info.txt'), 'w') as f:
-        f.write('%s (%s)\n%d Episodes\n\n%s' % (
-            anime.base_url, anime.name, anime.episodes_count, desc))
+    title = ('%s (%s)%s' % (anime.base_url, anime.name, os.linesep)).encode(errors='replace')
+    episode_count = ('%d Episodes%s%s' % (anime.episodes_count, os.linesep, os.linesep)).encode(errors='replace')
+    desc = textwrap.fill(text=anime.description, width=100).replace('\n', os.linesep).encode(errors='replace')
+    path = path.joinpath('info.txt')
+    with open(path, 'wb') as f:
+        f.write(title)
+        f.write(episode_count)
+        f.write(desc)
 
 
 def _write_jacked_file(path):

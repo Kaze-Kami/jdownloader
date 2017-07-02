@@ -8,17 +8,28 @@ class Anime:
     def __init__(self, base_url, parser):
         self._base_url = base_url
         self._parser = parser
-        self._html = self._get_html()
-        self._name = parser.get_name(self._html)
+        while True:
+            try:
+                html = self._get_html()
+                self._name = parser.get_name(self._html)
+                self._html = html
+                break
+            except Exception as e:
+                log("Error parsing anime '%s', retrying. ex: %s" % (self._base_url, e), MessageType.WARN, MessageLevel.DEBUG)
         self._description = ''
         self._episodes_count = 0
         self._episodes = []
 
     def prepare(self):
         log("Preparing anime '%s'" % self._name, MessageType.PROGRESS_START, MessageLevel.FULL_INFO)
-        self._description = self._parser.get_description(self._html)
-        self._episodes = self._parser.get_episodes(self._base_url)
-        self._episodes_count = len(self._episodes)
+        while True:
+            try:
+                self._description = self._parser.get_description(self._html)
+                self._episodes = self._parser.get_episodes(self._base_url)
+                self._episodes_count = len(self._episodes)
+                break
+            except Exception as e:
+                log("Error preparing anime '%s', retrying. ex: %s" % (self._name, e), MessageType.WARN, MessageLevel.DEBUG)
 
     @property
     def base_url(self):
