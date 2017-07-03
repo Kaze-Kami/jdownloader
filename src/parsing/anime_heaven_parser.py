@@ -46,5 +46,12 @@ def get_episodes(url):
     return sorted(episodes, key=lambda x: x.number)
 
 
+def get_cover_url(html):
+    for i in [t.get('src') for t in html.find_all('img')]:
+        if 'posters' in i:
+            return 'http://animeheaven.eu/' + i
+    raise ParseError('Can\'t find cover url')
+
+
 class ParseError(Exception):
     pass

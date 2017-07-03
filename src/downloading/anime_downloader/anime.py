@@ -9,16 +9,18 @@ class Anime:
         self._base_url = base_url
         self._parser = parser
         while True:
+            html = self._get_html()
             try:
-                html = self._get_html()
-                self._name = parser.get_name(self._html)
+                self._name = parser.get_name(html)
                 self._html = html
                 break
             except Exception as e:
                 log("Error parsing anime '%s', retrying. ex: %s" % (self._base_url, e), MessageType.WARN, MessageLevel.DEBUG)
+
         self._description = ''
         self._episodes_count = 0
         self._episodes = []
+        self._cover_url = ''
 
     def prepare(self):
         log("Preparing anime '%s'" % self._name, MessageType.PROGRESS_START, MessageLevel.FULL_INFO)
@@ -27,9 +29,11 @@ class Anime:
                 self._description = self._parser.get_description(self._html)
                 self._episodes = self._parser.get_episodes(self._base_url)
                 self._episodes_count = len(self._episodes)
+                self._cover_url = self._parser.get_cover_url(self._html)
                 break
             except Exception as e:
                 log("Error preparing anime '%s', retrying. ex: %s" % (self._name, e), MessageType.WARN, MessageLevel.DEBUG)
+                self._html = self._get_html()
 
     @property
     def base_url(self):
@@ -50,6 +54,10 @@ class Anime:
     @property
     def episodes(self):
         return self._episodes
+
+    @property
+    def cover_url(self):
+        return self._cover_url
 
     def _get_html(self):
         con = TorConnectionManager().new_connection()

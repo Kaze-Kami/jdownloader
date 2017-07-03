@@ -1,6 +1,5 @@
-import codecs
+import ctypes
 import os
-import sys
 import textwrap
 from datetime import datetime
 from threading import Thread
@@ -78,11 +77,14 @@ class AnimeDownload(Thread):
             self._on_finish()
 
     def _on_finish(self):
+        cover_save_path = self._save_path.joinpath('cover.png')
+        dl = Download(self._anime.cover_url, cover_save_path)
+        dl.start()
+        dl.join()
         # write info file
         _write_info_file(self._anime, self._save_path)
         # write jacked file?
         _write_jacked_file(self._save_path)
-        # todo download cover
         log('Finished %s' % self._anime.name, MessageType.PROGRESS_FINISH, MessageLevel.MINIMAL_INFO)
         for l in self._finish_listeners:
             l.on_download_finished(self)
@@ -102,3 +104,4 @@ def _write_info_file(anime, path):
 def _write_jacked_file(path):
     with open(path.joinpath('jacked'), 'w') as f:
         f.write(datetime.now().strftime("%d. %m. %y, %H:%M"))
+    ctypes.windll.kernel32.SetFileAttributesW(path, 2)

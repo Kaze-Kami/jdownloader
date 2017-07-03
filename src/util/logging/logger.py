@@ -74,7 +74,7 @@ def get_lock(stdout):
 
 
 class Logger:
-    def __init__(self, log_level, stdout=sys.stdout):
+    def __init__(self, log_level, stdout):
         self._stdout = stdout
         self._log_level = log_level.value
         self._write_lock = get_lock(stdout)
