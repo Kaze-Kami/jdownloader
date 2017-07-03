@@ -102,6 +102,7 @@ def _write_info_file(anime, path):
 
 
 def _write_jacked_file(path):
-    with open(path.joinpath('jacked'), 'w') as f:
+    p = path.joinpath('jacked')
+    with open(p, 'w') as f:
         f.write(datetime.now().strftime("%d. %m. %y, %H:%M"))
-    ctypes.windll.kernel32.SetFileAttributesW(path, 2)
+        os.system("attrib +h " + ('"%s"' % p))
