@@ -3,9 +3,9 @@ from pathlib import Path
 from os import path, remove
 
 
-def create_bat(path, main_path, output_path, get_path, l1, l2, debug_level):
+def create_bat(path, main_path, output_path, get_path, l1, l2, log_level):
     with open(path, 'w') as f:
-        f.write('python "%s" "%s" "%s" "%d" "%d" "%s"\nPAUSE' % (main_path, get_path, output_path, l1, l2, debug_level))
+        f.write('python "%s" "%s" "%s" "%s" "%s" "%s"\nPAUSE' % (main_path, get_path, output_path, str(l1), str(l2), log_level))
 
 
 if __name__ == '__main__':
