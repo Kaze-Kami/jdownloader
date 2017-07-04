@@ -36,8 +36,9 @@ class AnimeDownloader(Thread):
     def on_download_finished(self, anime_download):
         self._active_downloads.remove(anime_download)
         self._count += 1
-        _extend_gotten_file(anime_download.anime, self._gotten_file_path)
-        _truncate_get_file(anime_download.anime, self._get_file_path)
+        if not anime_download.anime.ongoing:
+            _extend_gotten_file(anime_download.anime, self._gotten_file_path)
+            _truncate_get_file(anime_download.anime, self._get_file_path)
         log('Downloaded %d of %d animes' % (self._count, len(self._urls)),
             MessageType.SYSTEM, MessageLevel.SYSTEM)
         if 0 == len(self._active_downloads):
@@ -54,10 +55,10 @@ class AnimeDownloader(Thread):
             ongoig = False
             if '-o' in url:
                 ongoig = True
-                url.replace('-o ', '')
+                url = url.replace('-o ', '')
             parser = _chose_parser(url)
-            anime = Anime(url, parser)
-            if not ongoig and not os.path.exists(self._base_save_path.joinpath(anime.name + "/jacked")):
+            anime = Anime(url, parser, ongoig=ongoig)
+            if ongoig or not os.path.exists(self._base_save_path.joinpath(anime.name + "/jacked")):
                 anime_download = AnimeDownload(anime, self._base_save_path)
                 self._active_downloads.append(anime_download)
                 anime_download.add_finish_listener(self)

@@ -5,7 +5,8 @@ from src.connection.tor.tor_connection_manager import TorConnectionManager
 
 
 class Anime:
-    def __init__(self, base_url, parser):
+    def __init__(self, base_url, parser, ongoing=False):
+        self._ongoing = ongoing
         self._base_url = base_url
         self._parser = parser
         while True:
@@ -58,6 +59,10 @@ class Anime:
     @property
     def cover_url(self):
         return self._cover_url
+
+    @property
+    def ongoing(self):
+        return self._ongoing
 
     def _get_html(self):
         con = TorConnectionManager().new_connection()
