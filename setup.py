@@ -26,10 +26,7 @@ if __name__ == '__main__':
         open(get_path, 'w')
 
     create_bat(root_dir.joinpath('run_high.bat'), main_path, dl_dir, get_path, 5, 20, 'MINIMAL')
-    # create_bat(root_dir.joinpath('run_high_debug.bat'), main_path, dl_dir, get_path, 5, 20, 'DEBUG')
-    # create_bat(root_dir.joinpath('run_high_quiet.bat'), main_path, dl_dir, get_path, 5, 20, 'QUIET')
     create_bat(root_dir.joinpath('run_low.bat'), main_path, dl_dir, get_path, 1, 5, 'MINIMAL')
-    # create_bat(root_dir.joinpath('run_low_debug.bat'), main_path, dl_dir, get_path, 1, 5, 'DEBUG')
-    # create_bat(root_dir.joinpath('run_low_quiet.bat'), main_path, dl_dir, get_path, 1, 5, 'QUIET')
+    create_bat(root_dir.joinpath('run_custom.bat'), main_path, 'output_directory', 'get_file_path', 'ACTIVE_PARSES', 'ACTIVE_DOWNLOAD', 'LOG_LEVEL')
 
     remove(root_dir.joinpath('setup.py'))

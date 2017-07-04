@@ -18,3 +18,4 @@ if __name__ == '__main__':
     shutil.copy(from_dir.joinpath('main.py'), bin_dir.joinpath('main.py'))
     shutil.copy(from_dir.joinpath('setup.py'), root_dir.joinpath('setup.py'))
     shutil.copy(from_dir.joinpath('remove_jacked_files.py'), root_dir.joinpath('remove_jacked_files.py'))
+    shutil.copy(from_dir.joinpath('README.txt'), root_dir.joinpath('README.txt'))
