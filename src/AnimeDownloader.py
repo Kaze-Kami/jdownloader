@@ -51,9 +51,13 @@ class AnimeDownloader(Thread):
         self._anime_download_manager.start()
         self._download_manager.start()
         for url in self._urls:
+            ongoig = False
+            if '-o' in url:
+                ongoig = True
+                url.replace('-o ', '')
             parser = _chose_parser(url)
             anime = Anime(url, parser)
-            if not os.path.exists(self._base_save_path.joinpath(anime.name + "/jacked")):
+            if not ongoig and not os.path.exists(self._base_save_path.joinpath(anime.name + "/jacked")):
                 anime_download = AnimeDownload(anime, self._base_save_path)
                 self._active_downloads.append(anime_download)
                 anime_download.add_finish_listener(self)
