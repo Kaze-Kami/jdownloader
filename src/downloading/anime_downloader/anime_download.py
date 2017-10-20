@@ -4,6 +4,7 @@ import textwrap
 from datetime import datetime
 from threading import Thread
 
+from src.util.jutil import to_usable_path
 from src.util.logging.logger import MessageType, MessageLevel, log
 
 from src.connection.tor.tor_connection_manager import TorConnectionManager
@@ -15,7 +16,7 @@ class AnimeDownload(Thread):
     def __init__(self, anime, base_save_path):
         super().__init__()
         self._anime = anime
-        self._save_path = base_save_path.joinpath(anime.name + '/')
+        self._save_path = base_save_path.joinpath(to_usable_path(anime.name) + '/')
         self._finish_listeners = []
         self._download_count = 0
         self._active_downloads = []
@@ -64,7 +65,7 @@ class AnimeDownload(Thread):
                 self._active_downloads.append(dl)
                 self._download_count += 1
             else:
-                log("Skipping %s episode %d, already downloaded" % (self._anime.name, ep.number), MessageType.PROGRESS_FINISH, MessageLevel.NORMAL_INFO)
+                log("Skipping %s episode %d, already downloaded" % (self._anime.name, ep.number), MessageType.PROGRESS_FINISH, MessageLevel.FULL_INFO)
         con.release()
 
     def _download(self):
@@ -77,10 +78,11 @@ class AnimeDownload(Thread):
             self._on_finish()
 
     def _on_finish(self):
-        cover_save_path = self._save_path.joinpath('cover.png')
-        dl = Download(self._anime.cover_url, cover_save_path)
-        dl.start()
-        dl.join()
+        if self._anime.cover_url:
+            cover_save_path = self._save_path.joinpath('cover.png')
+            dl = Download(self._anime.cover_url, cover_save_path)
+            dl.start()
+            dl.join()
         # write info file
         _write_info_file(self._anime, self._save_path)
         # write jacked file?
@@ -103,6 +105,8 @@ def _write_info_file(anime, path):
 
 def _write_jacked_file(path):
     p = path.joinpath('jacked')
+    if os.path.exists(p):
+        os.remove(p)
     with open(p, 'w') as f:
         f.write(datetime.now().strftime("%d. %m. %y, %H:%M"))
         os.system("attrib +h " + ('"%s"' % p))

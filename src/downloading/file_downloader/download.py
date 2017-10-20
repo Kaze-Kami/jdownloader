@@ -1,5 +1,7 @@
 from threading import Thread
 
+import sys
+
 from src.util.logging.logger import log, MessageType, MessageLevel
 
 from src.connection.tor.tor_connection_manager import TorConnectionManager
@@ -30,6 +32,7 @@ class Download(Thread):
             for arr in r.iter_content(4096):
                 save_file.write(arr)
                 self._data_gotten += len(arr)
+                # print("Gotten %.1f%s of %s" % (self._data_gotten / self._data_length * 100, '%', self._url))
         log("Download '%s' finished" % self._url, MessageType.PROGRESS_FINISH, MessageLevel.NORMAL_INFO)
         self._con.release()
         self._on_finish()

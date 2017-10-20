@@ -11,7 +11,7 @@ from src.downloading.anime_downloader.anime_download import AnimeDownload
 from src.downloading.anime_downloader.anime_download_manager import AnimeDownloadManager
 from src.downloading.file_downloader.download_manager import DownloadManager
 # from src.parsing.anime_heaven_parser import AnimeHeavenParser
-from src.parsing import anime_heaven_parser
+from src.parsing import a_parser_ah, h_parser_hc
 
 
 class AnimeDownloader(Thread):
@@ -85,7 +85,8 @@ def _read_get_file(get_file_path):
 
 
 _parsers = {
-    'animeheaven.eu': anime_heaven_parser
+    'animeheaven.eu': a_parser_ah,
+    'hentaicore.org': h_parser_hc,
 }
 
 

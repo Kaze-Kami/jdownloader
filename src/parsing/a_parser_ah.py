@@ -4,6 +4,10 @@ from bs4 import BeautifulSoup
 
 from src.connection.tor.tor_connection_manager import TorConnectionManager
 from src.downloading.anime_downloader.anime import Episode
+from src.parsing.parser_error import ParseError
+
+
+# parser for animeheaven.eu
 
 
 def get_name(html):
@@ -51,7 +55,3 @@ def get_cover_url(html):
         if 'posters' in i:
             return 'http://animeheaven.eu/' + i
     raise ParseError('Can\'t find cover url')
-
-
-class ParseError(Exception):
-    pass

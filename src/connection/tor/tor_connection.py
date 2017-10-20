@@ -32,7 +32,7 @@ class TorConnection:
         pass
 
     def change_ip(self):
-        self._logger.log('Changing ip for %s' % self._id, MessageType.SYSTEM, MessageLevel.DEBUG)
+        self._logger.log('Changing ip for %s' % self._id, MessageType.SYSTEM, MessageLevel.MISC)
         while True:
             try:
                 with Controller.from_port(port=self.control_port) as c:

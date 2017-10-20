@@ -7,7 +7,7 @@ import sys
 if __name__ == '__main__':
     from_dir = Path(os.path.dirname(__file__))
     root_dir = Path(sys.argv[1]) if 1 < len(sys.argv) else from_dir
-    root_dir = root_dir.joinpath('jdownloader/')
+    root_dir = root_dir.joinpath('make/jdownloader/')
     bin_dir = root_dir.joinpath('bin/')
     if root_dir.exists():
         shutil.rmtree(root_dir)

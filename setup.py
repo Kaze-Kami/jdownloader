@@ -3,9 +3,13 @@ from pathlib import Path
 from os import path, remove
 
 
-def create_bat(path, main_path, output_path, get_path, l1, l2, log_level):
+def create_bat(path, rel_main_path, rel_output_path, rel_get_path, l1, l2, log_level):
     with open(path, 'w') as f:
-        f.write('python "%s" "%s" "%s" "%s" "%s" "%s"\nPAUSE' % (main_path, get_path, output_path, str(l1), str(l2), log_level))
+        f.write('set cur_dir=%~dp0')
+        f.write('\nset main_path=%cur_dir%' + str(rel_main_path))
+        f.write('\nset get_path=%cur_dir%' + str(rel_get_path))
+        f.write('\nset output_path=%cur_dir%' + str(rel_output_path))
+        f.write('\npython "%s" "%s" "%s" "%s" "%s" "%s"\nPAUSE' % ('%main_path%', '%get_path%', '%output_path%', str(l1), str(l2), log_level))
 
 
 if __name__ == '__main__':
@@ -15,9 +19,9 @@ if __name__ == '__main__':
     root_dir = Path(path.dirname(__file__))
     # target path = m_dir/..
     # as structure should be some_dir/root/setup.py
-    dl_dir = root_dir.joinpath('downloads/')
-    main_path = root_dir.joinpath('bin/main.py')
-    get_path = root_dir.joinpath('to_get.txt')
+    dl_dir = Path('downloads/')
+    main_path = Path('bin/main.py')
+    get_path = Path('to_get.txt')
 
     if not dl_dir.exists():
         dl_dir.mkdir()
