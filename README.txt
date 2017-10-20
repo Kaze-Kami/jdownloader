@@ -29,3 +29,13 @@ Usage:
                 FULL (Errors, warnings, system messages, full progress info)
                 DEBUG (Errors, warnings, system messages, full progress info, debug info)
                 ALL (...)
+
+Supported Providers
+    Anime:
+        animeheaven.eu
+    Hentai:
+        hentaicore.org
+
+
+Providers to add:
+    serienstream.to
