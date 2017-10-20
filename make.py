@@ -12,7 +12,7 @@ if __name__ == '__main__':
     if root_dir.exists():
         shutil.rmtree(root_dir)
     else:
-        root_dir.mkdir()
+        os.makedirs(root_dir)
 
     shutil.copytree(from_dir.joinpath('src'), bin_dir.joinpath('src'))
     shutil.copy(from_dir.joinpath('main.py'), bin_dir.joinpath('main.py'))
