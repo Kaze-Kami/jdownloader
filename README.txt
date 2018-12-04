@@ -35,6 +35,7 @@ Supported Providers
         animeheaven.eu
     Hentai:
         hentaicore.org
+        simply-hentai.com
 
 
 Providers to add:
