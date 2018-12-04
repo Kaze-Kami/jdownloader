@@ -8,8 +8,8 @@ Setup:
 Usage:
     paste index urls of the animes you want into the to_get.txt
         eg (http://animeheaven.eu/i.php?a=Clockwork%20Planet%20Dubbed)
-    if you want do download an ongoing anime use the '-o' parameter so the downloader keeps checking even if the anime was completely downloaded once
-        eg (-o http://animeheaven.eu/i.php?a=Clockwork%20Planet%20Dubbed)
+    if you want do download an ongoing anime use the '--ongoing' parameter so the downloader keeps checking even if the anime was completely downloaded once
+        eg (http://animeheaven.eu/i.php?a=Clockwork%20Planet%20Dubbed --ongoing)
     your downloads will be located in the downloads directory
 
     use either use run_high.bat or run_low.bat or setup the run_custom.bat to start (low for less network usage, high for more)

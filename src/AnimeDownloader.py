@@ -2,7 +2,6 @@ import os
 from datetime import datetime
 from threading import Thread
 
-from src.util.jutil import remove_line
 from src.util.logging.logger import log, MessageType, MessageLevel
 
 from src.connection.tor.tor_connection_manager import TorConnectionManager
@@ -10,8 +9,7 @@ from src.downloading.anime_downloader.anime import Anime
 from src.downloading.anime_downloader.anime_download import AnimeDownload
 from src.downloading.anime_downloader.anime_download_manager import AnimeDownloadManager
 from src.downloading.file_downloader.download_manager import DownloadManager
-# from src.parsing.anime_heaven_parser import AnimeHeavenParser
-from src.parsing import a_parser_ah, h_parser_hc
+from src.parsing import a_parser_ah, h_parser_hc, h_parser_sh
 
 
 class AnimeDownloader(Thread):
@@ -53,9 +51,9 @@ class AnimeDownloader(Thread):
         self._download_manager.start()
         for url in self._urls:
             ongoig = False
-            if '-o' in url:
+            if '--ongoing' in url:
                 ongoig = True
-                url = url.replace('-o ', '')
+                url = url.replace(' --ongoing', '')
             parser = _chose_parser(url)
             anime = Anime(url, parser, ongoing=ongoig)
             if ongoig or not os.path.exists(self._base_save_path.joinpath(anime.name + "/jacked")):
@@ -87,6 +85,7 @@ def _read_get_file(get_file_path):
 _parsers = {
     'animeheaven.eu': a_parser_ah,
     'hentaicore.org': h_parser_hc,
+    'simply-hentai.com/': h_parser_sh,
 }
 
 
