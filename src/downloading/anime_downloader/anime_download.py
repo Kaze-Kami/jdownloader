@@ -50,7 +50,9 @@ class AnimeDownload(Thread):
         con.acquire()
         # select not downloaded episodes
         for ep in self._anime.episodes:
-            ep_save_path = self._save_path.joinpath('%d.mp4' % ep.number)
+            # todo: changed from '%d.mp4' as update for simply-hentai, needs update for other providers aswell so the fileytpe is provided!
+            # todo: Episode class provides an default constructor taking the same arguments as before assuming mp4 as default for file_type to provide backwards compatibility
+            ep_save_path = self._save_path.joinpath('%d.%s' % (ep.number, ep.file_type))
             gotten = False
             if os.path.exists(ep_save_path):
                 ep_size = int(con.get(ep.url, stream=True).headers.get('Content-Length'))

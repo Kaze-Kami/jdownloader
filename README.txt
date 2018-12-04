@@ -32,7 +32,7 @@ Usage:
 
 Supported Providers
     Anime:
-        animeheaven.eu
+        animeheaven.eu // not working atm
     Hentai:
         hentaicore.org
         simply-hentai.com

@@ -30,7 +30,7 @@ def get_episodes(url):
         raise ParseError("Can't find image urls!")
     img_nr = 0
     for img_url in img_urls:
-        imgs.append(Episode(img_url, img_nr))
+        imgs.append(Episode(img_url, img_nr, 'jpg'))
         img_nr += 1
     con.release()
     return imgs

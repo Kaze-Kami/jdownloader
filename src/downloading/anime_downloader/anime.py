@@ -73,13 +73,18 @@ class Anime:
 
 
 class Episode:
-    def __init__(self, url, number):
+    def __init__(self, url, number, file_type='mp4'):
         self._number = number
         self._url = url
+        self._file_type = file_type
 
     @property
     def number(self):
         return self._number
+
+    @property
+    def file_type(self):
+        return self._file_type
 
     @property
     def url(self):
