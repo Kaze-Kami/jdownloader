@@ -84,8 +84,6 @@ def _read_get_file(get_file_path):
 
 _parsers = {
     'animeheaven.eu': a_parser_ah,
-    'hentaicore.org': h_parser_hc,
-    'simply-hentai.com/': h_parser_sh,
 }
 
 
@@ -117,7 +115,3 @@ def _truncate_get_file(anime, get_file_path):
         for l in lines[last_comment:]:
             if l != url + '\n':
                 wf.write(l)
-
-
-
-

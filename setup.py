@@ -2,9 +2,9 @@ from pathlib import Path
 
 from os import path, remove
 
-
 def create_bat(path, rel_main_path, rel_output_path, rel_get_path, l1, l2, log_level):
     with open(path, 'w') as f:
+        f.write("ECHO OFF")
         f.write('set cur_dir=%~dp0')
         f.write('\nset main_path=%cur_dir%' + str(rel_main_path))
         f.write('\nset get_path=%cur_dir%' + str(rel_get_path))
