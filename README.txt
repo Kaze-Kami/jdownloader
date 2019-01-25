@@ -33,9 +33,6 @@ Usage:
 Supported Providers
     Anime:
         animeheaven.eu // not working atm
-    Hentai:
-        hentaicore.org
-        simply-hentai.com
 
 
 Providers to add:
